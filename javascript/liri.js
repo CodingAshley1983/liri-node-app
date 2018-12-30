@@ -59,11 +59,15 @@ function movieThis() {
         var movie = answers.movie
         var URL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=full&tomatoes=true&apikey=trilogy"
         axios.get(URL).then(function (response) {
+           if(response.data.title==="undefined"){
+               mrNobody();
+               console.log("Not found- searching Mr Nobody instead")
+           }
             console.log(
                 "Movie Title: " + response.data.Title + "\n",
                 "Year: " + response.data.Year + "\n",
                 "IMDB Rating: " + response.data.imdbRating + "\n",
-                "Rotten tomatoes rating: " + response.data.Ratings[1] + "\n",
+                "Rotten tomatoes rating: " + response.data.Ratings + "\n",
                 "Country:" + response.data.Country + "\n",
                 "Language: " + response.data.Language + "\n",
                 "Plot: " + response.data.Plot + "\n",
@@ -72,8 +76,32 @@ function movieThis() {
 
 
             )
+           
         })
 
+    })
+
+}
+
+function mrNobody(){
+    var movie = "Mr.Nobody"
+    var URL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=full&tomatoes=true&apikey=trilogy"
+    axios.get(URL).then(function (response) {
+       
+        console.log(
+            "Movie Title: " + response.data.Title + "\n",
+            "Year: " + response.data.Year + "\n",
+            "IMDB Rating: " + response.data.imdbRating + "\n",
+            "Rotten tomatoes rating: " + response.data.Ratings + "\n",
+            "Country:" + response.data.Country + "\n",
+            "Language: " + response.data.Language + "\n",
+            "Plot: " + response.data.Plot + "\n",
+            "Actors: " + response.data.Actors
+
+
+
+        )
+       
     })
 
 }
